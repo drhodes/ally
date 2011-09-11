@@ -1,0 +1,17 @@
+
+
+
+
+
+
+
+struct Point x y ;
+
+func square [ x ] [ mul x x ]
+
+func dist [ x , y ] 
+[ 
+	let x2 = square x,
+    let y2 = square y,
+    return sqrt | add x2 y2
+]

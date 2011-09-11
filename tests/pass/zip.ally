@@ -1,0 +1,7 @@
+// take two lists and zip them together.
+
+module list {
+	def zip(l1, l2){
+		
+	}
+}

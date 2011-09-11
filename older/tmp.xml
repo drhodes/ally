@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<mod line="">
+  <symbol line="./tests/pass/add.ally:3" val="main"/>
+  <function line="./tests/pass/add.ally:4">
+    <symbol line="./tests/pass/add.ally:4" val="zip"/>
+    <parameterlist line="./tests/pass/add.ally:4">
+      <symbol line="./tests/pass/add.ally:4" val="a"/>
+      <symbol line="./tests/pass/add.ally:4" val="b"/>
+    </parameterlist>
+    <block line="./tests/pass/add.ally:4"/>
+  </function>
+</mod>

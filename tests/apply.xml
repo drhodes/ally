@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<mod line="">
+  <symbol line="apply.ally:1" val="list"/>
+  <function line="apply.ally:2">
+    <symbol line="apply.ally:2" val="apply"/>
+    <parameterlist line="apply.ally:2">
+      <symbol line="apply.ally:2" val="f"/>
+      <symbol line="apply.ally:2" val="val"/>
+    </parameterlist>
+    <block line="apply.ally:2">
+      <statement line="apply.ally:3">
+        <expression line="apply.ally:3">
+          <place line="apply.ally:3">
+            <ident line="apply.ally:3">
+              <symbol line="apply.ally:3" val="val"/>
+            </ident>
+          </place>
+          <arr line="apply.ally:3">
+            <FWD line="apply.ally:3"/>
+          </arr>
+          <place line="apply.ally:3">
+            <ident line="apply.ally:3">
+              <symbol line="apply.ally:3" val="f"/>
+            </ident>
+          </place>
+          <arr line="apply.ally:3">
+            <FWD line="apply.ally:3"/>
+          </arr>
+          <place line="apply.ally:3">
+            <ident line="apply.ally:3">
+              <symbol line="apply.ally:3" val="return"/>
+            </ident>
+          </place>
+        </expression>
+      </statement>
+    </block>
+  </function>
+</mod>

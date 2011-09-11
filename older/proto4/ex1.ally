@@ -1,0 +1,36 @@
+mac minus a b {
+  ( a - b )
+  }
+
+mac * a b {
+  ( a * b )
+  }
+
+subcheck1 0 {
+  null => return;
+}
+
+subcheck1 n {     
+  n, 1 > minus > return
+}
+
+id n {
+  let temp = g;
+  n => return;
+}
+
+id n {
+  let temp = b;
+  n => return;
+}
+
+fact x {
+  let a = x;  
+  a > id >> subcheck1 > a;
+  id >> _ > return;
+}
+
+navbar a {
+  let p = a;
+  p > return;
+}

@@ -1,0 +1,91 @@
+% Created 2011-08-27 Sat 18:06
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{hyperref}
+
+
+\title{The Ally programming language}
+\author{Derek A. Rhodes}
+\date{27 August 2011}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\vspace*{1cm}
+
+\usepackage[bigsym]{mathptm}
+\sffamily 
+\DeclareOption{bigsym}{\DeclareSymbolFont{largesymbols}{OMX}{psycm}{m}{n}}
+\ProcessOptions
+
+\section{What is it?}
+\label{sec-1}
+
+The ally grammar describes specialized petrinets that execute general
+programs which
+
+ are isomorphic to diagrams.
+
+\subsection{What are.}
+\label{sec-1.1}
+
+Petrinets effectively describe concurrent systems.
+
+There are n elements
+
+There are tokens, functions and places.
+a function pulls one or more tokens from one of more places, uses it
+as an argument and puts the result in one or more places
+ 
+\subsection{Syntax.}
+\label{sec-1.2}
+
+
+$\times$
+\rhd
+
+\begin{eq}
+
+a \triangleright b \triangleright c \triangleright d \triangleright e
+\end{eq}
+
+predicate arrows.  These inspect the places before them and put a
+token in one of two control places.  
+
++>
+->
+<>
+
+
+<+
++>
+->
+<-
+<>
+<<
+>>
+
+\begin{center}
+\begin{tabular}{l}
+ <+  \\
+ +>  \\
+\hline
+ <-  \\
+ <>  \\
+ <<  \\
+ >>  \\
+ >   \\
+ <   \\
+\end{tabular}
+\end{center}
+
+
+
+
+\end{document}

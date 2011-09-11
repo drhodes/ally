@@ -1,0 +1,47 @@
+
+
+data Point(x y);
+
+func (@x @y) in: seq {
+  func x {
+	map f seq;
+  }	
+}
+
+
+x in seq
+
+
+in seq { x {
+  
+
+func sum: *a { -- adds all elements }
+
+func *a +: *b {
+	 (sum *a *b)
+
+func a *b +: c {
+	 [a] -> b -> 3;
+}
+
+func x *: y {
+	 (* x y)
+}
+
+func prod!: a {
+	 return | map * a;
+}
+
+func v1 dot: v2 {
+	 return | map | sum . prod | zip v1 v2;	 
+}
+
+({a b | return a+b; }
+
+func A foo: B {
+	 return | zip
+	 		| map square [1..3] 
+			| map cube [1..3];
+}
+
+[1..5] foo [5..1]

@@ -1,0 +1,26 @@
+/*
+send mul a b {multiply(a, b)};
+send minus a b {minus(a, b)};
+send lt a b {lessthan(a, b)};
+*/
+
+// a lonely literal is coerced into an anonymous place holding
+// that literal
+
+def filter(f, xs){
+	var init xs
+	var accum 
+
+	init > head > |= list
+                  |> f +> append 
+                  |> append <> accum > |= id2 
+                                       |> done;
+ 
+	init > tail > |= list
+                  |> id1 init 
+                  |> |= emptyP 
+                     |+> id2 
+                     |-> id1;
+}
+		
+               

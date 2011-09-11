@@ -1,0 +1,38 @@
+mac minus a b { ( a - b ) }
+mac * a b { ( a * b ) }
+mac = a b { ( a == b ) }
+
+
+subcheck1 0 {
+  null => return;
+}
+
+subcheck1 n {     
+  n > minus;
+  1 > minus > return;
+}
+
+id n {
+  n => return;
+}
+
+fact x {
+  let a = x;
+  let d = 1;
+  
+  a > id >> subcheck1 > a;
+  id >> _ <> return;
+}
+
+
+tup a b {
+  a > return.a;
+  b > return.b;
+}
+
+foo t {  
+  let p1 = t;
+  
+  p1.a > tmp_place2;
+  p1.b > tmp_place3;
+}

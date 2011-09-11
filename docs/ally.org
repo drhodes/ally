@@ -1,0 +1,52 @@
+The Ally programming language
+#+AUTHOR: Derek A. Rhodes
+
+* What is it?
+The ally grammar describes specialized petrinets that execute general programs which
+
+ are isomorphic to diagrams.
+
+** What are.
+Petrinets effectively describe concurrent systems.
+
+There are n elements
+
+There are tokens, functions and places.
+a function pulls one or more tokens from one of more places, uses it as an argument and puts the result in one or more places
+ 
+** Syntax.
+
+code
+
+
+
+
+
+
+predicate arrows.  These inspect the places before them and put a token in one of two control places.  
+
+
+
+
++>
+->
+<>
+
+
+<+
++>
+->
+<-
+<>
+<<
+>>
+|<+
+|+>
+|->
+|<-
+|<>
+|<<
+|>>
+|>
+|<
+

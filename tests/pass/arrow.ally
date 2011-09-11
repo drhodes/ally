@@ -1,0 +1,14 @@
+module arrows {
+	def arrowtest() {
+		a +> a;
+		a <+ a;
+		a -> a;
+		a <- a;		
+		a <- a;	
+		a << a;
+		a >> a;
+		a <> a;
+		a > a;
+		a < a;
+	}
+}
