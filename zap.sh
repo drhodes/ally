@@ -1,2 +1,2 @@
-find ./ | grep "~$" | xargs rm -f
+find ./ | grep "~$" | xargs trash
 find ./ | grep ".pyc" | xargs trash 
