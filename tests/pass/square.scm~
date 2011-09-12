@@ -1,20 +1,18 @@
-// -*- c -*-
-
 module square {
   // all these functions do the same thing.
   def square6(x) {
     return mul (x, x);
   }
-  
+	  
   def square7(x) {
     return < mul < (x, x) ;
   }
-  
+	  
   def square1(x) {			 
     (x, x) > mul > return;		
     // 
   }
-  
+	  
   def square3(x, asdf) {
     |= mul
         |< (x, x)
@@ -22,8 +20,7 @@ module square {
   }
   
   def square4(x) {
-    return <
-        |= mul
+    return < |= mul
         |< x // first arg to mul
         |< x // second arg to mul
         ;

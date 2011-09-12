@@ -56,6 +56,7 @@ def tbl(n):
         "PRS":PRS,
         "PFWD":PFWD,
         "PBAK":PBAK,
+        "SPACE":SPACE,
         "pipeq":pipeq,
         "arr":arr,
         "ident":ident,
@@ -105,10 +106,10 @@ class Node(object):
     def error(self, msg):
         print "slur: Error @ %s" % self.line
         print msg
-        raise ValueError("slur: Error @ %s" % self.line)
+        raise ValueError("ally: Error @ %s" % self.line)
 
 
-
+'''
 comment
 module
 rawstring
@@ -134,6 +135,7 @@ PLS
 PRS
 PFWD
 PBAK
+SPACE
 pipeq
 arr
 ident
@@ -146,3 +148,4 @@ block
 parameterlist
 function
 mod
+'''

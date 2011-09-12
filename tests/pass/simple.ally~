@@ -1,0 +1,25 @@
+// -*- ally -*-
+
+module simple {
+    def max(x, y) {		
+        |= gt (x, y)
+        |+> return x
+        |-> return y;				
+	}		
+    
+    def wut() {		
+        return < |= lt
+                 |< (x, y) |= temp
+                           |< temp;
+        
+        return < asdf > |= asdf
+                        |< asdf;
+	}
+    
+    def min (x, y) {
+        |= lt < (x, y)    
+        |> return;
+    }	
+}
+
+
