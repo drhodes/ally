@@ -1,9 +1,9 @@
-module simple {
+module simple {    
     def max(x, y) {		
         |= gt (x, y)
         |+> return x        
         |-> return y;				
-    }		
+    }    
 }
 
 
