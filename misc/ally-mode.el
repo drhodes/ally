@@ -16,7 +16,12 @@
 (defvar ally-indent-offset 4
   "*Indentation offset for `ally-mode'.")
 
-; swiped from python mode
+(defun current-line ()
+  "Return the vertical position of point..."
+  (+ (count-lines (window-start) (point))
+	 (if (= (current-column) 0) 1 0)))
+
+;; swiped from python mode
 (defun ally-indent-region (start end)                                                            
   "`indent-region-function' for Ally.                                                            
 Leaves validly-indented lines alone, i.e. doesn't indent to                                        
@@ -27,8 +32,15 @@ another valid position."
     (goto-char start)                                                                              
     (or (bolp) (forward-line 1))                                                                   
     (while (< (point) end)                                                                         
-      (or (and (bolp) (eolp))                                                                      
-      (ally-indent-line))                                                                    
+	  (beginning-of-line)
+	  (ally-indent-line)
+	  (ally-indent-line)
+	  (end-of-line)
+	  (ally-indent-line)
+	  (ally-indent-line)
+	  (beginning-of-line)
+	  (ally-indent-line)
+	  (ally-indent-line)
       (forward-line 1))
     (move-marker end nil)))
 
@@ -127,11 +139,14 @@ another valid position."
   ;;(setq comment-end "")
 
   (make-local-variable 'ally-indent-offset)
+  (make-local-variable 'ally-indent-buffer)
 
   ;;(set (make-local-variable 'comment-start) comment-start)
   ;;(set (make-local-variable 'comment-end) comment-end)
   (set (make-local-variable 'indent-line-function) 'ally-indent-line)
   (set (make-local-variable 'indent-region-function) #'ally-indent-region)
+  ;(set (make-local-variable 'indent-region-function) #'ally-indent-buffer)
+  
 
   (modify-syntax-entry ?# "< b" ally-mode-syntax-table)
   (modify-syntax-entry ?\n "> b" ally-mode-syntax-table)
