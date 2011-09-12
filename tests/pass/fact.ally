@@ -1,0 +1,14 @@
+module math {
+    def min1 (n) {
+        return min(n, 1);
+    }
+
+    def gt1(val){
+        return gt(val, 1);
+    }
+    
+    def fact (n) {
+        return < |= dup <+ gt1 n
+                 |<> mul n <> min1 <- gt1;
+    }
+}
