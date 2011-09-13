@@ -13,7 +13,7 @@ from pyPEG import keyword, _and, _not, ignore
 
 def comment():          return [re.compile(r"//.*"), re.compile("/\*.*?\*/", re.S)]
 def module():           return re.compile(r"module")
-def rawstring():        return [re.compile(r"`.*?`")]
+def rawstring():        return [re.compile(r"\".*?\"")]
 def literal():          return re.compile(r'\d*\.\d*|\d+|".*?"')
 def symbol():           return re.compile(r"\w+")
 def typedec():          return re.compile(r"var|func|pred")
@@ -55,11 +55,11 @@ def place():            return [assign, ident, parameterlist]
 
 def expression():       return place, -1, (arr, place)
 def declaration():      return typedec, symbol, "=", ident
-def statement():        return [declaration, expression, comment], ";"
+def statement():        return [declaration, expression, comment, rawstring], ";"
 def block():            return "{", -1, [rawstring, statement], "}"
 def parameterlist():    return "(", 0, (symbol, -1, (",", symbol)), ")"
 def function():         return keyword("def"), symbol, parameterlist, block
-def mod():              return "module", symbol, "{", -1, function, "}"
+def mod():              return "module", symbol, "{", -1, [function, rawstring], "}"
 
 # simpleLanguage <- function;
 def simpleLanguage():   return -1, mod

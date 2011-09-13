@@ -1,7 +1,5 @@
 ;; major mode for the ally programming language
 
-
-
 (defvar ally-events
   '("var"
 	"pred"
@@ -52,8 +50,7 @@ another valid position."
   (interactive)
   (let ((indent-col 0)
 		(pipe-col 0)
-		)
-	
+		)	
     (save-excursion
       (beginning-of-line)
       (condition-case nil
@@ -100,15 +97,16 @@ another valid position."
 (defvar ally-font-lock-defaults
   `((
 	 ;; stuff between "
-	 ("\"\\.\\*\\?" . font-lock-string-face)
+	 ;("\"\\.\\*\\?" . font-lock-string-face)
+	 ;("\`\\.\\*\\?" . font-lock-string-face)	 
 	 
 	 (">" . font-lock-keyword-face)
 	 ("<" . font-lock-keyword-face)
-	 ("|" . font-lock-keyword-face)
-	 ("+" . font-lock-keyword-face)
-	 ("=" . font-lock-keyword-face)
-	 ("-" . font-lock-keyword-face)
-	 	 
+	 ("|" . font-lock-type-face)
+	 ("+" . font-lock-string-face)
+	 ("=" . font-lock-builtin-face)
+	 ("-" . font-lock-type-face)
+	 (";" . font-lock-comment-delimiter-face)
 	 ( ,(regexp-opt ally-keywords 'words) . font-lock-builtin-face)
 	 ( ,(regexp-opt ally-events 'words) . font-lock-constant-face)
 	 )))
@@ -151,6 +149,7 @@ another valid position."
   (modify-syntax-entry ?# "< b" ally-mode-syntax-table)
   (modify-syntax-entry ?\n "> b" ally-mode-syntax-table)
   ;;A gnu-correct program will have some sort of hook call here.
+  (c-toggle-electric-state -1)
   )
 
 (provide 'ally-mode)

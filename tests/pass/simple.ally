@@ -1,9 +1,15 @@
-module simple {    
-    def max(x, y) {		
-        |= gt (x, y)
-        |+> return x        
-        |-> return y;				
+module simple {
+    "this module does x"    
+    def max(x, y) {        
+        a |= x
+          |< c
+          |-> d
+          |+> e f g > h > |= i
+                          |< j
+                          ;
+        
     }    
+    
 }
 
 

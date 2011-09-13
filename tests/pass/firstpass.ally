@@ -1,0 +1,12 @@
+module simple {
+    "this module does x"
+    def max (x, y) {
+        var tmp__id__1__ = x;
+        var tmp__id__2__ = i;
+        a < tmp__id__1__ ;
+        tmp__id__1__ < c ;
+        tmp__id__1__ < d ;
+        tmp__id__1__ +> e < f < g > h > tmp__id__2__ ;
+        tmp__id__2__ < j;
+        }    
+}
