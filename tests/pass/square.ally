@@ -5,7 +5,7 @@ module square {
     }
     
     def square7(x) {
-        return < mul < (x, x) ;
+        return < mul < (x, x);
     }
     
     def square1(x) {			 

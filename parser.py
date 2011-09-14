@@ -55,7 +55,7 @@ def place():            return [assign, ident, parameterlist]
 
 def expression():       return place, -1, (arr, place)
 def declaration():      return typedec, symbol, "=", ident
-def statement():        return [declaration, expression, comment, rawstring], ";"
+def statement():        return [declaration, expression, comment, rawstring], -2, ";"
 def block():            return "{", -1, [rawstring, statement], "}"
 def parameterlist():    return "(", 0, (symbol, -1, (",", symbol)), ")"
 def function():         return keyword("def"), symbol, parameterlist, block

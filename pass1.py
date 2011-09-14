@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+import parser
 from parser import result
 import sys
 
@@ -331,7 +332,7 @@ class block(Node):
     def show(self):
         temp = []
         for item in self.args[0]:
-            temp.append(item.show())
+            temp.append(item.show() + ";")
         return "\n".join(temp)
 
 class parameterlist(Node):
@@ -358,15 +359,15 @@ class mod(Node):
 
     def show(self, quiet=False):
         name = self.args[0][0]
-        out ("module %s {\n" % name.show())
+        output = ""
+        output += ("module %s {\n" % name.show())
         for item in self.args[0][1:]:
             if quiet:
                 item.show()
             else:
-                out(item.show()+"\n")
-        out ("\n}")
-        
-
+                output += (item.show()+"\n")
+        output += "\n}\n"
+        return output
 def tbl(n):
     d = {
         "comment":comment,
@@ -412,4 +413,24 @@ def tbl(n):
 
 
 t = maketree(tree)
-t.show()
+filename = "./temp/tmpfile.ally"
+# first pass
+tmpfile = open(filename, 'w')
+tmpfile.write(t.show())
+
+# second pass
+# tmpfile = open(filename, 'w')
+
+# import fileinput
+# from pyPEG import parse
+# from parser import simpleLanguage
+# files = fileinput.FileInput(filename)
+
+# result = parse( simpleLanguage(), 
+#                 files,
+#                 True,
+#                 parser.comment,
+#                 lineCount = True,
+#                 )
+# tree2 = maketree(result[0])
+

@@ -1,0 +1,37 @@
+module square {
+def square1 (x) {
+
+return < mul < (x, x);
+}
+def square7 (x) {
+
+return < mul < (x, x);
+}
+def square1 (x) {
+
+(x, x) > mul > return;
+}
+def square3 (x, asdf) {
+var tmp__id__1__ = mul;
+tmp__id__1__ ;
+ tmp__id__1__ < (x, x) ;
+ tmp__id__1__ > return;
+}
+def square4 (x) {
+var tmp__id__2__ = mul;
+return < tmp__id__2__ ;
+ tmp__id__2__ < x ;
+ tmp__id__2__ < x;
+}
+def square5 (x) {
+var x1 = x
+var x2 = x
+
+x1 > mul;
+
+x2 > mul;
+
+mul > return;
+}
+
+}
