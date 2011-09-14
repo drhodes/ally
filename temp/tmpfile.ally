@@ -1,37 +1,57 @@
-module square {
-def square1 (x) {
+module galore {
+def func1 (x) {
+var __pipeid_1__ = x;
+var __pipeid_2__ = y1;
+var __pipeid_3__ = y;
+__pipeid_1__ > a; 
 
-return < mul < (x, x);;
-}
-def square7 (x) {
+__pipeid_1__ > c; 
+c > c1; 
+c1 > c2; 
+c2 > c1; 
+c2 >> c3; 
 
-return < mul < (x, x);;
-}
-def square1 (x) {
+__pipeid_1__ >> d; 
+d1 >> d; 
 
-(x, x) > mul > return;;
-}
-def square3 (x, asdf) {
-var tmp__id__1__ = mul;
-tmp__id__1__ ;
- tmp__id__1__ < (x, x) ;
- tmp__id__1__ > return;;
-}
-def square4 (x) {
-var tmp__id__2__ = mul;
-return < tmp__id__2__ ;
- tmp__id__2__ < x ;
- tmp__id__2__ < x;;
-}
-def square5 (x) {
-var x1 = x;
-var x2 = x;
+g +> __pipeid_1__; 
+g1 +> g; 
 
-x1 > mul;;
+__pipeid_1__ +> h; 
+h +> (h1, h2); 
 
-x2 > mul;;
+__pipeid_1__ -> (i3, i2, i2); 
+(i3, i2, i2) -> i3; 
+i3 > __pipeid_2__; 
 
-mul > return;;
+j -> __pipeid_2__; 
+j1 -> j; 
+
+__pipeid_2__ > k; 
+k > __pipeid_2__; 
+k > k1; 
+k1 > k; 
+k2 > k1; 
+k3 > k2; 
+
+m >> __pipeid_2__; 
+m >> m1; 
+m2 > m1; 
+m3 > m2; 
+m4 > m3; 
+m5 > m4; 
+
+__pipeid_2__ >> n; 
+n1 >> n; 
+
+__pipeid_2__ > o; 
+o > o1; 
+
+f > __pipeid_2__; 
+f1 > f; 
+__pipeid_3__ > f1; 
+z > __pipeid_3__; 
+
 }
 
 }

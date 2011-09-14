@@ -3,38 +3,9 @@ import parser
 from parser import result
 import sys
 
-def out(s): sys.stdout.write(s)
-
-def levelout(s, n): 
-    out(n*"  ")
-    out(s)
-
-def newline(): out("\n")
-
-def pretty(pt, depth=0):
-    if type(pt) == list:        
-        for node in pt:
-            pretty(node, depth+1)        
-        return            
-    if type(pt) == unicode:
-        levelout(pt, depth+1)        
-        newline()
-    else:
-        levelout(pt.__name__, depth)
-        out(": ")
-        out(pt.__name__.line)
-        newline()
-        pretty(pt.what, depth+1)
-
-tree = result[0] 
-
-
-def symgen():
-    ID = 0
-    while 1:
-        ID += 1
-        yield "_id__%d__" % ID
-SYM = symgen()
+from pass1 import (
+    Node,
+    )
 
 def maketree(pt):
     if type(pt) == list:        
@@ -51,33 +22,13 @@ def maketree(pt):
         line = pt.__name__.line        
         return tbl(name)(name, line, maketree(pt.what))
 
-class Node(object):
-    def __init__(self, args):
-        self.line = args[1]
-        self.args = args[2:]
-
-    def cls_name(self):
-        return self.__class__.__name__
-
-    def error(self, msg):
-        print "ally: Error @ %s" % self.line
-        print msg
-        raise ValueError("ally: Error @ %s" % self.line)
-
 class Pipe(Node):
     def __init__(self, *args, **kwargs):
         Node.__init__(self, ("Pipe Void",) + args)
         self.arrString = kwargs["arrstr"]
 
-    def show(self, lastpipe=None):
-        if not self.isPipedArrow():
-            return self.arrString
-        if lastpipe == None:
-            return self.arrString
-        else:
-            temp = "%s %s "            
-            return temp % (lastpipe, self.without_pipe())
-
+    def show(self):
+        return self.arr_string()
     
     def arr_string(self):
         return self.arrString
@@ -99,7 +50,9 @@ class rawstring(Node):
 class literal(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
-        
+    def show(self):
+        return self.args[0]
+
 class symbol(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
@@ -112,11 +65,9 @@ class typedec(Node):
     def show(self):
         return self.args[0]
 
-
 class dot(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
-
 
 class TFI(Pipe):
     def __init__(self, *args):
@@ -136,7 +87,7 @@ class FFI(Pipe):
 
 class DUB(Pipe):
     def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<>" )
+        Pipe.__init__(self, args, arrstr="<>" )    
 
 class LS(Pipe):
     def __init__(self, *args):
@@ -154,41 +105,6 @@ class BAK(Pipe):
     def __init__(self, *args):
         Pipe.__init__(self, args,arrstr= "<" )
 
-class PTFI(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="|<+" )
-
-class PIFT(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="|+>" )
-
-class PIFF(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="|->" )
-
-class PFFI(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="|<-" )
-
-class PDUB(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="|<>" )
-
-class PLS(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="|<<" )
-
-class PRS(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="|>>" )
-
-class PFWD(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="|>" )
-
-class PBAK(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="|<" )
 
 class SPACE(Pipe):
     def __init__(self, *args):
@@ -199,24 +115,16 @@ class pipeq(Node):
         Node.__init__(self, args)
         self.symid = SYM.next()
 
-    def isPipeq(self): return True
-
     def show(self):
         temp = "tmp_%s"
         return temp % self.symid
-        
+
 class arr(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
 
-    def isPipeq(self):
-        return False#return self.args[0][0].isPipeq()
-    #return False
-    def isPipedArrow(self):
-        return self.args[0][0].isPipedArrow()
-
-    def show(self, lastpipe):        
-        return str(self.args[0][0].show(lastpipe))
+    def show(self):        
+        return str(self.args[0][0].show())
 
 class ident(Node):
     def __init__(self, *args):
@@ -228,9 +136,6 @@ class assign(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
 
-    def isPipeq(self):
-        return self.args[0][0].isPipeq()
-    
     def gen_local(self):        
         temp = "var %s = %s;"
         a = self.args[0][0].show()
@@ -247,69 +152,66 @@ class place(Node):
     def __init__(self, *args):
         Node.__init__(self, args)        
 
-    def isPipeq(self):
-        if self.args[0][0].cls_name() == "assign":
-            return self.args[0][0].isPipeq()
-        return False
-    def gen_local(self):
-        if self.isPipeq():
-            return self.args[0][0].gen_local()
 
-    def isPipedArrow(self):
-        return False 
-
-    def show(self, lastpipe=None):
+    def show(self):
         return self.args[0][0].show()
               
 class expression(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
-        self.locals = []
 
-    def gen_locals(self):
-        for item in self.args[0]:
-            if item.isPipeq():                
-                self.locals.extend(item.gen_local())
+    def decompose_arrow(self, a, b, c):        
+        stmts = []
+
+        def knit(fst, arrstr, snd):
+            return "%s %s %s; \n" % (fst.show(), arrstr, snd.show())
         
-    def show_locals(self):
-        return "\n".join(self.locals) + "\n"
+        # split arrows and flip them, to reduce work in the next pass.
+        if b.show() == "<>":
+            stmts.append( knit(a, ">", c) )
+            stmts.append( knit(c, ">", a) )
+        elif b.show() == "<<":
+            stmts.append( knit(c, ">>", a))
+        elif b.show() == "<+":
+            stmts.append( knit(c, "+>", a))
+        elif b.show() == "<-":
+            stmts.append( knit(c, "->", a))
+        elif b.show() == "<":
+            stmts.append( knit(c, ">", a))                      
+        else:                
+            stmts.append( knit(a, b.show(), c))
+        return stmts
 
     def show(self):     
-        self.gen_locals()
-        #print self.locals
-        showlist = []
-        lastpipe = None        
-        was_last_item_pipe = False
-              
+        showlist = []              
         items = list(self.args[0])
-        accum = []
+        accum = []        
+        while 1:
+            if len(items) == 0:
+                break
 
-        for item in items:
-            if item.isPipeq():
-                lastpipe = item.show(lastpipe)
-            if item.isPipedArrow():
-                if lastpipe != None:
-                    accum.append(";\n")
-                    accum.append(lastpipe)
-                    accum.append(item.args[0][0].without_pipe())                    
+            if len(items) == 3:
+                accum.append(items)
+                break
+            accum.append(items[:3])            
+            items = items[2:]                
+        
+        stmts = []
+        for a,b,c in accum:
+            for stmt in self.decompose_arrow(a, b, c):                
+                stmts.append(stmt)
+        return ''.join(stmts)
 
-                else:
-                    accum.append(item.show())                
-            if not item.isPipedArrow():
-                accum.append(item.show(lastpipe))
-        exprs = " ".join(accum) + ";"
-        return self.show_locals() + exprs
 
 class declaration(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        temp = "%s %s = %s"
+        temp = "%s %s = %s;"
         typedec = self.args[0][0].show()
         lhs = self.args[0][1].show()
         rhs = self.args[0][2].show()
-        return temp % (typedec, lhs, rhs)    
-        
+        return temp % (typedec, lhs, rhs)            
 
 class statement(Node):
     def __init__(self, *args):
@@ -321,12 +223,19 @@ class block(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        temp = []
+        temp = []        
         for item in self.args[0]:
-            temp.append(item.show() + ";")
+            temp.append(item.show())
         return "\n".join(temp)
 
 class parameterlist(Node):
+    def __init__(self, *args):
+        Node.__init__(self, args)
+    def show(self):
+        temp = "(%s)" % ', '.join([x.show() for x in self.args[0]])
+        return temp
+
+class tupe(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
@@ -359,6 +268,8 @@ class mod(Node):
                 output += (item.show()+"\n")
         output += "\n}\n"
         return output
+
+
 def tbl(n):
     d = {
         "comment":comment,
@@ -377,17 +288,7 @@ def tbl(n):
         "RS":RS,
         "FWD":FWD,
         "BAK":BAK,
-        "PTFI":PTFI,
-        "PIFT":PIFT,
-        "PIFF":PIFF,
-        "PFFI":PFFI,
-        "PDUB":PDUB,
-        "PLS":PLS,
-        "PRS":PRS,
-        "PFWD":PFWD,
-        "PBAK":PBAK,
         "SPACE":SPACE,
-        "pipeq":pipeq,
         "arr":arr,
         "ident":ident,
         "assign":assign,
@@ -395,6 +296,7 @@ def tbl(n):
         "expression":expression,
         "declaration":declaration,
         "statement":statement,
+        "tupe": tupe,
         "block":block,
         "parameterlist":parameterlist,
         "function":function,
@@ -402,12 +304,17 @@ def tbl(n):
         }
     return d[n]
 
+tree = result[0]
 
 t = maketree(tree)
 filename = "./temp/tmpfile.ally"
-# first pass
+
+# second pass
+
 tmpfile = open(filename, 'w')
 tmpfile.write(t.show())
+
+
 
 # second pass
 # tmpfile = open(filename, 'w')

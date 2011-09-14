@@ -1,0 +1,44 @@
+module galore {
+    def func1 (x) {
+        var __pipeid_1__ = x;
+        var __pipeid_2__ = y1;
+        var __pipeid_3__ = y;
+        __pipeid_1__ > a;
+        __pipeid_1__ > c;
+        c > c1;
+        c1 > c2;
+        c2 > c1;
+        c2 >> c3;
+        __pipeid_1__ >> d;
+        d1 >> d;
+        g +> __pipeid_1__;
+        g1 +> g;
+        __pipeid_1__ +> h;
+        h +> (h1, h2);
+        __pipeid_1__ -> (i3, i2, i2);
+        (i3, i2, i2) -> i3;
+        i3 > __pipeid_2__;
+        j -> __pipeid_2__;
+        j1 -> j;
+        __pipeid_2__ > k;
+        k > __pipeid_2__;
+        k > k1;
+        k1 > k;
+        k2 > k1;
+        k3 > k2;
+        m >> __pipeid_2__;
+        m >> m1;
+        m2 > m1;
+        m3 > m2;
+        m4 > m3;
+        m5 > m4;
+        __pipeid_2__ >> n;
+        n1 >> n;
+        __pipeid_2__ > o;
+        o > o1;
+        f > __pipeid_2__;
+        f1 > f;
+        __pipeid_3__ > f1;
+        z > __pipeid_3__;
+    }
+}

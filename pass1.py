@@ -28,12 +28,11 @@ def pretty(pt, depth=0):
 
 tree = result[0] 
 
-
 def symgen():
     ID = 0
     while 1:
         ID += 1
-        yield "_id__%d__" % ID
+        yield "_pipeid_%d_" % ID
 SYM = symgen()
 
 def maketree(pt):
@@ -108,7 +107,9 @@ class rawstring(Node):
 class literal(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
-        
+    def show(self):
+        return self.args[0]
+
 class symbol(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
@@ -121,11 +122,9 @@ class typedec(Node):
     def show(self):
         return self.args[0]
 
-
 class dot(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
-
 
 class TFI(Pipe):
     def __init__(self, *args):
@@ -211,7 +210,7 @@ class pipeq(Node):
     def isPipeq(self): return True
 
     def show(self):
-        temp = "tmp_%s"
+        temp = "_%s_"
         return temp % self.symid
         
 class arr(Node):
@@ -313,7 +312,7 @@ class declaration(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        temp = "%s %s = %s"
+        temp = "%s %s = %s;"
         typedec = self.args[0][0].show()
         lhs = self.args[0][1].show()
         rhs = self.args[0][2].show()
@@ -332,7 +331,7 @@ class block(Node):
     def show(self):
         temp = []
         for item in self.args[0]:
-            temp.append(item.show() + ";")
+            temp.append(item.show())
         return "\n".join(temp)
 
 class parameterlist(Node):
@@ -341,7 +340,14 @@ class parameterlist(Node):
     def show(self):
         temp = "(%s)" % ', '.join([x.show() for x in self.args[0]])
         return temp
-        
+
+class tupe(Node):
+    def __init__(self, *args):
+        Node.__init__(self, args)
+    def show(self):
+        temp = "(%s)" % ', '.join([x.show() for x in self.args[0]])
+        return temp
+       
 class function(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
@@ -406,6 +412,7 @@ def tbl(n):
         "statement":statement,
         "block":block,
         "parameterlist":parameterlist,
+        "tupe":tupe,
         "function":function,
         "mod":mod,
         }
@@ -417,6 +424,7 @@ filename = "./temp/tmpfile.ally"
 # first pass
 tmpfile = open(filename, 'w')
 tmpfile.write(t.show())
+tmpfile.close()
 
 # second pass
 # tmpfile = open(filename, 'w')

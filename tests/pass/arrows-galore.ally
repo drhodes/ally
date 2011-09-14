@@ -1,0 +1,19 @@
+module galore {
+    def func1 (x) {
+        a |= x
+          |> c > c1 <> c2 >> c3
+          |>> d << d1           
+          |<+ g <+ g1
+          |+> h +> (h1, h2) 
+          |-> (i3, i2, i2) -> i3 > |= y1
+                                   |<- j <- j1
+                                   |<> k <> k1 k2 k3
+                                   |<< m >> m1 m2 m3 m4 m5
+                                   |>> n << n1
+                                   |> o > o1
+                                   |< f < f1
+                                   |= y z
+                                   ;
+    }
+}
+

@@ -14,21 +14,23 @@ module square {
     
     def square3(x, asdf) {
         |= mul
-        |< (x, x)
+        |< (1, 1.134)
         |> return;
     }
     
     def square4(x) {
         return < |= mul
                  |< x // first arg to mul
-                 |< x; // second arg to mul        
+                 |< x // second arg to mul
+                 ;        
     }
     
     def square5(x) {
         // every function gets compiled down to something
-        // that looks like this.
+        // that looks like this.        
         var x1 = x;
-        var x2 = x;    
+        var x2 = x;
+        ctrl p1 = x;
         x1 > mul;
         x2 > mul;
         mul > return;		

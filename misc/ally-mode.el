@@ -3,6 +3,7 @@
 (defvar ally-events
   '("var"
 	"pred"
+	"ctrl"
 	"return"
 	))
 
@@ -105,7 +106,7 @@ another valid position."
 	 ("|" . font-lock-type-face)
 	 ("+" . font-lock-string-face)
 	 ("=" . font-lock-builtin-face)
-	 ("-" . font-lock-type-face)
+	 ("-" . font-lock-warning-face)
 	 (";" . font-lock-comment-delimiter-face)
 	 ( ,(regexp-opt ally-keywords 'words) . font-lock-builtin-face)
 	 ( ,(regexp-opt ally-events 'words) . font-lock-constant-face)
