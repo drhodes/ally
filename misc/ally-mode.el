@@ -3,6 +3,7 @@
 (defvar ally-events
   '("var"
 	"pred"
+	"func"
 	"ctrl"
 	"return"
 	))

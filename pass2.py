@@ -5,6 +5,7 @@ import sys
 
 from pass1 import (
     Node,
+    parameterlist,
     )
 
 def maketree(pt):
@@ -235,13 +236,6 @@ class block(Node):
         for item in self.args[0]:
             temp.append(item.show())
         return "\n".join(temp)
-
-class parameterlist(Node):
-    def __init__(self, *args):
-        Node.__init__(self, args)
-    def show(self):
-        temp = "(%s)" % ', '.join([x.show() for x in self.args[0]])
-        return temp
 
 class tupe(Node):
     def __init__(self, *args):

@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 import parser
 from parser import result
+from utility import *
 import sys
 
 def out(s): sys.stdout.write(s)
@@ -348,9 +349,13 @@ class block(Node):
 class parameterlist(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
-    def show(self):
-        temp = "(%s)" % ', '.join([x.show() for x in self.args[0]])
-        return temp
+    def show(self):        
+        pairs = pairify(self.args[0])
+        items = []
+        for a, b in pairs:
+            items.append("%s %s" % (a.show(), b.show()))
+        result = "(%s)" % ", ".join(items)
+        return result
 
 class tupe(Node):
     def __init__(self, *args):

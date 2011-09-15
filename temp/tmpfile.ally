@@ -1,22 +1,10 @@
 module math {
-def min1 (n) {
-min > return;
-n > min;
-1 > n;
+def apply (func f, var x) {
+f > ap;
+x > ap;
+ap > return;
 }
-def compose (f, g) {
-f >> a;
-f >> b;
-f >> c;
-f >> d;
-f >> e;
-}
-def gt1 (val) {
-gt > return;
-val > gt;
-1 > gt;
-}
-def fact (n) {
+def fact (var n, func f) {
 var tmp = 1;
 min1 > n;
 n > min1;

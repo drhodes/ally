@@ -41,7 +41,7 @@ def ID(): return "=>"
 def DI(): return "<="
 def SPACE(): return ""
 
-arrow = [ TFI, IFT, IFF, FFI, DUB, LS, RS, FWD, BAK, 
+arrow = [ TFI, IFT, IFF, FFI, DUB, LS, RS, FWD, BAK,
           PTFI, PIFT, PIFF, PFFI, PDUB, PLS, PRS, PFWD, PBAK, SPACE]
 
 #def pipeq():            return re.compile(r"\|=")
@@ -51,16 +51,12 @@ def arr():              return arrow
 def ident():            return symbol, -1, (dot, symbol)
 def assign():           return pipeq, [ident, tupe]
 def place():            return [assign, ident, tupe]
-
-#def expression():       return [(place, -1, (arr, place)),
-#                                (place, expression)]
-
 def expression():       return place, -1, (arr, place)
 def declaration():      return typedec, symbol, "=", ident
 def statement():        return [declaration, expression, comment, rawstring], -2, ";"
 def block():            return "{", -1, [rawstring, statement], "}"
 def tupe():             return "(", 0, ([literal, ident], -1, (",", [literal, ident])), ")"
-def parameterlist():    return "(", 0, (symbol, -1, (",", symbol)), ")"
+def parameterlist():    return "(", 0, (typedec, symbol, -1, (",", typedec, symbol)), ")"
 def function():         return keyword("def"), symbol, parameterlist, block
 def mod():              return "module", symbol, "{", -1, [function, rawstring], "}"
 

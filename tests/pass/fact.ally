@@ -1,22 +1,17 @@
 module math {
-    def min1 (n) {
-        return min n 1;
+    def apply (func f, var x) {
+        |= ap (f, x)
+        |> return;
     }
-    
-    def compose(f, g) {
-        f >> (a,b,c,d,e);
-    }
-    
-    def gt1(val){
-        return gt (val, 1);
-    }
-    
-    def fact (n) {
+
+
+    def fact (var n, func f) {
         var tmp = 1;
         
         min1 <> |= n > mul <> tmp > dup > return
                 |> |= gt1
                    |+> min1
-                   |-> dup;
-    }   
+                   |-> dup
+                   ;
+    }
 }
