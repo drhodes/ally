@@ -1,5 +1,5 @@
 module math {
-    def add(x, y) {
+    def add(var x, var y) {
         
     }
     

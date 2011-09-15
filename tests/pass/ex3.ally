@@ -1,17 +1,17 @@
 
 module ex3 {
-	def filter(f, xs){
+	def filter(func f, var xs){
 		var init = xs;
 		var accum = list;
 	
 		init > head > |= list
-                      |> f +> append <> accum > |= id.2
+                      |> f +> append <> accum > |= id2
                                                 |> return;
  
 		init > tail > |= list 
-                      |> id.1 > init 
+                      |> id1 > init 
                       |> |= emptyP 
-                         |+> id.2 
-                         |-> id.1;
+                         |+> id2 
+                         |-> id1;
 	}
 }

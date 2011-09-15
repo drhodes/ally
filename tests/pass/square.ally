@@ -1,31 +1,31 @@
 module square {
     // all these functions do the same thing.
-    def square1(x) {
+    def square1(var x) {
         return mul (x, x);
     }
     
-    def square7(x) {
+    def square7(var x) {
         return < mul < (x, x);
     }
     
-    def square1(x) {			 
+    def square1(var x) {			 
         (x, x) > mul > return;		    
     }   
     
-    def square3(x, asdf) {
+    def square3(var x, var asdf) {
         |= mul
         |< (1, 1.134)
         |> return;
     }
     
-    def square4(x) {
+    def square4(var x) {
         return < |= mul
                  |< x // first arg to mul
                  |< x // second arg to mul
                  ;        
     }
     
-    def square5(x) {
+    def square5(var x) {
         // every function gets compiled down to something
         // that looks like this.        
         var x1 = x;

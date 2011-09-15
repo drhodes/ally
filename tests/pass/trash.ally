@@ -1,5 +1,5 @@
 module galore {
-    def func1 (x) {
+    def func1 (var x) {
         var __pipeid_1__ = x;
         var __pipeid_2__ = y1;
         var __pipeid_3__ = y;
