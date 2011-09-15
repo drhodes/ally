@@ -6,6 +6,17 @@ import sys
 from pass1 import (
     Node,
     parameterlist,
+    function,
+    TFI,
+    IFT,
+    IFF,
+    FFI,
+    DUB,
+    LS,
+    RS,
+    FWD,
+    BAK,
+    SPACE,
     )
 
 def maketree(pt):
@@ -52,13 +63,13 @@ class literal(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        return self.args[0]
+        return self.args[0] 
 
 class symbol(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        return self.args[0]
+        return self.args[0] 
         
 class typedec(Node):
     def __init__(self, *args):
@@ -69,7 +80,7 @@ class typedec(Node):
 class dot(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
-
+'''
 class TFI(Pipe):
     def __init__(self, *args):
         Pipe.__init__(self, args, arrstr="<+" )
@@ -110,7 +121,7 @@ class BAK(Pipe):
 class SPACE(Pipe):
     def __init__(self, *args):
         Pipe.__init__(self, args, arrstr="<" )
-
+'''
 class pipeq(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
@@ -179,7 +190,7 @@ class expression(Node):
         c_str = c.show()
         stmts = []
         for s in a_strs:
-            stmts.append(self.glue(s, b_str, c_str))
+            stmts.append(self.glue(s, b_str, c_str) + self.line_comment())
         return stmts
 
     def distribute_right(self, a, b, c):
@@ -190,7 +201,7 @@ class expression(Node):
         c_strs = [x.show() for x in c_vals]
         stmts = []
         for s in c_strs:
-            stmts.append(self.glue(a_str, b_str, s))
+            stmts.append(self.glue(a_str, b_str, s) + self.line_comment())
         return stmts
 
     def distribute_tupe(self, a, b, c):
@@ -211,7 +222,7 @@ class expression(Node):
 
     def show(self):     
         if len(self.args[0]) == 1:
-            return self.show1(self.args[0])
+            return self.show1(self.args[0]) + self.line_comment()
 
         a,b,c = self.args[0]
 
@@ -223,10 +234,9 @@ class expression(Node):
         else:
             stmts.append(self.glue(a.show(),
                                    b.show(),
-                                   c.show()))
+                                   c.show()) + self.line_comment())
         
         return "\n".join(stmts)
-
 
 class declaration(Node):
     def __init__(self, *args):
@@ -259,16 +269,7 @@ class tupe(Node):
     def show(self):
         temp = "(%s)" % ', '.join([x.show() for x in self.args[0]])
         return temp
-        
-class function(Node):
-    def __init__(self, *args):
-        Node.__init__(self, args)
-    def show(self):
-        temp = "def %s %s {\n%s\n}"
-        name = self.args[0][0]
-        params = self.args[0][1]
-        block = self.args[0][2]
-        return temp % (name.show(), params.show(), block.show())
+
 
 # ------------------------------------------------------------------        
 class mod(Node):
@@ -325,28 +326,6 @@ def tbl(n):
 tree = result[0]
 
 t = maketree(tree)
-filename = "./temp/tmpfile.ally"
-
-# second pass
-
+filename = "./temp/tmpfile-pass-3.ally"
 tmpfile = open(filename, 'w')
 tmpfile.write(t.show())
-
-
-
-# second pass
-# tmpfile = open(filename, 'w')
-
-# import fileinput
-# from pyPEG import parse
-# from parser import simpleLanguage
-# files = fileinput.FileInput(filename)
-
-# result = parse( simpleLanguage(), 
-#                 files,
-#                 True,
-#                 parser.comment,
-#                 lineCount = True,
-#                 )
-# tree2 = maketree(result[0])
-

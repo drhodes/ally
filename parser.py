@@ -4,7 +4,6 @@ import re, fileinput
 import pyPEG
 from pyPEG import parse
 from pyPEG import keyword, _and, _not, ignore
-#from xmlast import pyAST2XML
 
 # pyPEG:
 #                    0: following element is optional
@@ -72,45 +71,3 @@ result = parse( simpleLanguage(),
                 comment,
                 lineCount = True,
                 )
-
-'''
-def out(s): sys.stdout.write(s)
-
-def pretty_print(prsr, depth=0, inlist=False):    
-    if type(prsr) == list:
-        for p in prsr:
-            pretty_print(p, depth+1)
-
-    if prsr.__class__.__name__ == 'Symbol':
-        out("\n")
-        out(" " * depth)   
-        out('<%s line="%s"' % (str(prsr[0]), prsr.__name__.line))
-        if type(prsr[1]) == list:
-            out(">")
-            pretty_print(prsr[1], depth+1, True)            
-            #out("{{%s}}" % prsr)
-        else: 
-            out(' val="%s">' % str(prsr[1]))
-
-        out('</%s>' % (str(prsr[0])))
-
-#pretty_print(result)
-
-
-def pretty_print(prsr, depth=0, inlist=False):    
-    if type(prsr) == list:
-        for p in prsr:
-            pretty_print(p, depth+1)
-        out(")")
-
-    if prsr.__class__.__name__ == 'Symbol':
-        out("\n")
-        out(" " * depth)
-        out('(%s "%s"' % (str(prsr[0]), prsr.__name__.line))
-        if type(prsr[1]) == list:
-            pretty_print(prsr[1], depth+1, True)            
-        else: 
-            out(' "%s")' % str(prsr[1]))
-'''
-
-

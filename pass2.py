@@ -6,6 +6,7 @@ import sys
 from pass1 import (
     Node,
     parameterlist,
+    function,
     )
 
 def maketree(pt):
@@ -165,7 +166,7 @@ class expression(Node):
         stmts = []
 
         def knit(fst, arrstr, snd):
-            return "%s %s %s; \n" % (fst.show(), arrstr, snd.show())
+            return "%s %s %s; %s\n" % (fst.show(), arrstr, snd.show(), snd.line_comment())
         
         # split arrows and flip them, to reduce work in the next pass.
         if b.show() == "<>":
@@ -183,9 +184,8 @@ class expression(Node):
             stmts.append( knit(a, b.show(), c))
         return stmts
 
-
     def show1(self, items):
-        return items[0].show() + ";"
+        return items[0].show() + "; %s" % items[0].line_comment()
 
     def show(self):     
         showlist = []              
@@ -211,12 +211,11 @@ class expression(Node):
                 stmts.append(stmt)
         return ''.join(stmts)
 
-
 class declaration(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        temp = "%s %s = %s;"
+        temp = "%s %s = %s;" + self.line_comment()
         typedec = self.args[0][0].show()
         lhs = self.args[0][1].show()
         rhs = self.args[0][2].show()
@@ -226,7 +225,7 @@ class statement(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        return self.args[0][0].show()
+        return self.args[0][0].show() 
 
 class block(Node):
     def __init__(self, *args):
@@ -244,6 +243,7 @@ class tupe(Node):
         temp = "(%s)" % ', '.join([x.show() for x in self.args[0]])
         return temp
         
+'''
 class function(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
@@ -253,7 +253,7 @@ class function(Node):
         params = self.args[0][1]
         block = self.args[0][2]
         return temp % (name.show(), params.show(), block.show())
-
+'''
 # ------------------------------------------------------------------        
 class mod(Node):
     def __init__(self, *args):
@@ -309,28 +309,6 @@ def tbl(n):
 tree = result[0]
 
 t = maketree(tree)
-filename = "./temp/tmpfile.ally"
-
-# second pass
-
+filename = "./temp/tmpfile-pass-2.ally"
 tmpfile = open(filename, 'w')
 tmpfile.write(t.show())
-
-
-
-# second pass
-# tmpfile = open(filename, 'w')
-
-# import fileinput
-# from pyPEG import parse
-# from parser import simpleLanguage
-# files = fileinput.FileInput(filename)
-
-# result = parse( simpleLanguage(), 
-#                 files,
-#                 True,
-#                 parser.comment,
-#                 lineCount = True,
-#                 )
-# tree2 = maketree(result[0])
-

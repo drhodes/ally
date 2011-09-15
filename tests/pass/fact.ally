@@ -4,7 +4,6 @@ module math {
         |> return;
     }
 
-
     def fact (var n, func f) {
         var tmp = 1;
         

@@ -1,5 +1,5 @@
 module galore {
-    def func1 (x) {        
+    def func1 (var x) {        
         a |= x
           |> c > c1 <> c2 >> c3
           |>> d << d1           
@@ -16,7 +16,7 @@ module galore {
                                    ;
     }
 
-    def what (x) {
+    def what () {
         |= a;
     }    
 }
