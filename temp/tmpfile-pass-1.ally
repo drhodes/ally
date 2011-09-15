@@ -1,45 +1,46 @@
 module galore {
 def func1 (var x) {       /* :::: ./temp/tmpfile-pass-2.ally:2 */ 
-x > a;      /* :::: ./temp/tmpfile-pass-2.ally:3 */
-x > c;      /* :::: ./temp/tmpfile-pass-2.ally:5 */
-c > c1;      /* :::: ./temp/tmpfile-pass-2.ally:6 */
-c1 > c2;      /* :::: ./temp/tmpfile-pass-2.ally:7 */
-c2 > c1;      /* :::: ./temp/tmpfile-pass-2.ally:8 */
-c2 >> c3;      /* :::: ./temp/tmpfile-pass-2.ally:9 */
-x >> d;      /* :::: ./temp/tmpfile-pass-2.ally:11 */
-d1 >> d;      /* :::: ./temp/tmpfile-pass-2.ally:12 */
-g +> x;      /* :::: ./temp/tmpfile-pass-2.ally:14 */
-g1 +> g;      /* :::: ./temp/tmpfile-pass-2.ally:15 */
-x +> h;      /* :::: ./temp/tmpfile-pass-2.ally:17 */
-h +> (h1, h2);      /* :::: ./temp/tmpfile-pass-2.ally:18 */
-x -> (i3, i2, i2);      /* :::: ./temp/tmpfile-pass-2.ally:20 */
-(i3, i2, i2) -> i3;      /* :::: ./temp/tmpfile-pass-2.ally:21 */
-i3 > y1;      /* :::: ./temp/tmpfile-pass-2.ally:22 */
-j -> y1;      /* :::: ./temp/tmpfile-pass-2.ally:24 */
-j1 -> j;      /* :::: ./temp/tmpfile-pass-2.ally:25 */
-y1 > k;      /* :::: ./temp/tmpfile-pass-2.ally:27 */
-k > y1;      /* :::: ./temp/tmpfile-pass-2.ally:28 */
-k > k1;      /* :::: ./temp/tmpfile-pass-2.ally:29 */
-k1 > k;      /* :::: ./temp/tmpfile-pass-2.ally:30 */
-k2 > k1;      /* :::: ./temp/tmpfile-pass-2.ally:31 */
-k3 > k2;      /* :::: ./temp/tmpfile-pass-2.ally:32 */
-m >> y1;      /* :::: ./temp/tmpfile-pass-2.ally:34 */
-m >> m1;      /* :::: ./temp/tmpfile-pass-2.ally:35 */
-m2 > m1;      /* :::: ./temp/tmpfile-pass-2.ally:36 */
-m3 > m2;      /* :::: ./temp/tmpfile-pass-2.ally:37 */
-m4 > m3;      /* :::: ./temp/tmpfile-pass-2.ally:38 */
-m5 > m4;      /* :::: ./temp/tmpfile-pass-2.ally:39 */
-y1 >> n;      /* :::: ./temp/tmpfile-pass-2.ally:41 */
-n1 >> n;      /* :::: ./temp/tmpfile-pass-2.ally:42 */
-y1 > o;      /* :::: ./temp/tmpfile-pass-2.ally:44 */
-o > o1;      /* :::: ./temp/tmpfile-pass-2.ally:45 */
-f > y1;      /* :::: ./temp/tmpfile-pass-2.ally:47 */
-f1 > f;      /* :::: ./temp/tmpfile-pass-2.ally:48 */
-y > f1;      /* :::: ./temp/tmpfile-pass-2.ally:49 */
-z > y;      /* :::: ./temp/tmpfile-pass-2.ally:50 */
+var x = 1;      /* :::: ./temp/tmpfile-pass-2.ally:3 */
+x > a;      /* :::: ./temp/tmpfile-pass-2.ally:4 */
+x > c;      /* :::: ./temp/tmpfile-pass-2.ally:6 */
+c > c1;      /* :::: ./temp/tmpfile-pass-2.ally:7 */
+c1 > c2;      /* :::: ./temp/tmpfile-pass-2.ally:8 */
+c2 > c1;      /* :::: ./temp/tmpfile-pass-2.ally:9 */
+c2 >> c3;      /* :::: ./temp/tmpfile-pass-2.ally:10 */
+x >> d;      /* :::: ./temp/tmpfile-pass-2.ally:12 */
+d1 >> d;      /* :::: ./temp/tmpfile-pass-2.ally:13 */
+g +> x;      /* :::: ./temp/tmpfile-pass-2.ally:15 */
+g1 +> g;      /* :::: ./temp/tmpfile-pass-2.ally:16 */
+x +> h;      /* :::: ./temp/tmpfile-pass-2.ally:18 */
+h +> (h1, h2);      /* :::: ./temp/tmpfile-pass-2.ally:19 */
+x -> (i3, i2, i2);      /* :::: ./temp/tmpfile-pass-2.ally:21 */
+(i3, i2, i2) -> i3;      /* :::: ./temp/tmpfile-pass-2.ally:22 */
+i3 > y1;      /* :::: ./temp/tmpfile-pass-2.ally:23 */
+j -> y1;      /* :::: ./temp/tmpfile-pass-2.ally:25 */
+j1 -> j;      /* :::: ./temp/tmpfile-pass-2.ally:26 */
+y1 > k;      /* :::: ./temp/tmpfile-pass-2.ally:28 */
+k > y1;      /* :::: ./temp/tmpfile-pass-2.ally:29 */
+k > k1;      /* :::: ./temp/tmpfile-pass-2.ally:30 */
+k1 > k;      /* :::: ./temp/tmpfile-pass-2.ally:31 */
+k2 > k1;      /* :::: ./temp/tmpfile-pass-2.ally:32 */
+k3 > k2;      /* :::: ./temp/tmpfile-pass-2.ally:33 */
+m >> y1;      /* :::: ./temp/tmpfile-pass-2.ally:35 */
+m >> m1;      /* :::: ./temp/tmpfile-pass-2.ally:36 */
+m2 > m1;      /* :::: ./temp/tmpfile-pass-2.ally:37 */
+m3 > m2;      /* :::: ./temp/tmpfile-pass-2.ally:38 */
+m4 > m3;      /* :::: ./temp/tmpfile-pass-2.ally:39 */
+m5 > m4;      /* :::: ./temp/tmpfile-pass-2.ally:40 */
+y1 >> n;      /* :::: ./temp/tmpfile-pass-2.ally:42 */
+n1 >> n;      /* :::: ./temp/tmpfile-pass-2.ally:43 */
+y1 > o;      /* :::: ./temp/tmpfile-pass-2.ally:45 */
+o > o1;      /* :::: ./temp/tmpfile-pass-2.ally:46 */
+f > y1;      /* :::: ./temp/tmpfile-pass-2.ally:48 */
+f1 > f;      /* :::: ./temp/tmpfile-pass-2.ally:49 */
+y > f1;      /* :::: ./temp/tmpfile-pass-2.ally:50 */
+z > y;      /* :::: ./temp/tmpfile-pass-2.ally:51 */
 }
-def what () {       /* :::: ./temp/tmpfile-pass-2.ally:53 */ 
-a;      /* :::: ./temp/tmpfile-pass-2.ally:54 */
+def what () {       /* :::: ./temp/tmpfile-pass-2.ally:54 */ 
+a;      /* :::: ./temp/tmpfile-pass-2.ally:55 */
 }
 
 }

@@ -63,7 +63,14 @@ class literal(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        return self.args[0] 
+        val = self.args[0]
+        '''
+        if "." in val:
+            return "float (%s)" % val
+        else:
+            return "int (%s)" % val
+            '''
+        return val
 
 class symbol(Node):
     def __init__(self, *args):
@@ -201,7 +208,7 @@ class declaration(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        temp = "%s %s = %s;"
+        temp = "%s %s = %s;" + self.line_comment()
         typedec = self.args[0][0].show()
         lhs = self.args[0][1].show()
         rhs = self.args[0][2].show()
@@ -238,7 +245,7 @@ class mod(Node):
     def show(self, quiet=False):
         name = self.args[0][0]
         output = ""
-        output += ("module %s {\n" % name.show())
+        output += "module %s { %s\n" % (name.show(), self.line_comment())
         for item in self.args[0][1:]:
             if quiet:
                 item.show()
