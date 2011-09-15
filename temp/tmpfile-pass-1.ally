@@ -1,0 +1,14 @@
+module math {
+def apply (func f, var x) {       /* :::: ./temp/tmpfile-pass-1.ally:2 */ 
+ap < (f, x);      /* :::: ./temp/tmpfile-pass-1.ally:3 */
+ap > return;      /* :::: ./temp/tmpfile-pass-1.ally:4 */
+}
+def fact (var n, func f) {       /* :::: ./temp/tmpfile-pass-1.ally:6 */ 
+var tmp = 1;      /* :::: ./temp/tmpfile-pass-1.ally:7 */
+min1 <> n > mul <> tmp > dup > return;      /* :::: ./temp/tmpfile-pass-1.ally:8 */
+n > gt1;      /* :::: ./temp/tmpfile-pass-1.ally:9 */
+gt1 +> min1;      /* :::: ./temp/tmpfile-pass-1.ally:10 */
+gt1 -> dup;      /* :::: ./temp/tmpfile-pass-1.ally:11 */
+}
+
+}
