@@ -1,4 +1,5 @@
 #!/bin/bash
+./zap.sh
 
 stat .git > /dev/null
 
