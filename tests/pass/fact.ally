@@ -1,33 +1,22 @@
 module math {
     def min1 (n) {
-        return min(n, 1);
+        return min n 1;
     }
-
+    
+    def compose(f, g) {
+        f >> (a,b,c,d,e);
+    }
+    
     def gt1(val){
-        return gt(val, 1);
+        return gt (val, 1);
     }
     
     def fact (n) {
-        return < |= dup <+ gt1 n
-                 |<> mul n <> min1 <- gt1;
-    }
-}
-
-
-module math {
-    def min1 (n) {        
-        return < min < (n, 1);
-    }
-    
-    def gt1 (val) {        
-        return < gt < (val, 1);
-    }
-    
-    def fact (n) {
-        var tmp__id__1__ = dup;
+        var tmp = 1;
         
-        return < tmp__id__1__ <+ gt1 < n ;
-        tmp__id__1__ <> mul < n <> min1 <- gt1;
-    }    
+        min1 <> |= n > mul <> tmp > dup > return
+                |> |= gt1
+                   |+> min1
+                   |-> dup;
+    }   
 }
-

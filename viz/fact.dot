@@ -1,0 +1,37 @@
+digraph fact {
+  node [shape=box];
+  id;
+  mul;
+  min1;
+
+  node [shape=circle];
+  ret;
+  n;
+  tmp;
+  
+  node [shape=circle, style=filled, color=red];    
+  f;
+  node [shape=circle, style=filled, color=green];    
+  t;
+
+  
+  node [shape=diamond, style=filled, color=lightgrey];
+  gt1;
+
+
+  min1 -> n;
+  n -> min1;
+  n -> mul;
+  mul -> tmp;
+  tmp -> mul;
+  tmp -> id;
+  id -> ret;
+  n -> gt1;
+  gt1 -> t;
+  t -> min1;
+  gt1 -> f;
+  f -> id;
+          
+}
+
+

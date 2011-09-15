@@ -182,9 +182,16 @@ class expression(Node):
             stmts.append( knit(a, b.show(), c))
         return stmts
 
+
+    def show1(self, items):
+        return items[0].show() + ";"
+
     def show(self):     
         showlist = []              
         items = list(self.args[0])
+        if len(items) == 1:
+            return self.show1(items)
+
         accum = []        
         while 1:
             if len(items) == 0:
@@ -197,6 +204,7 @@ class expression(Node):
             items = items[2:]                
         
         stmts = []
+
         for a,b,c in accum:
             for stmt in self.decompose_arrow(a, b, c):                
                 stmts.append(stmt)

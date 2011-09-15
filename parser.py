@@ -37,9 +37,11 @@ def PLS(): return "|<<"
 def PRS(): return "|>>"
 def PFWD(): return "|>"
 def PBAK(): return "|<"
+def ID(): return "=>"
+def DI(): return "<="
 def SPACE(): return ""
 
-arrow = [ TFI, IFT, IFF, FFI, DUB, LS, RS, FWD, BAK,
+arrow = [ TFI, IFT, IFF, FFI, DUB, LS, RS, FWD, BAK, 
           PTFI, PIFT, PIFF, PFFI, PDUB, PLS, PRS, PFWD, PBAK, SPACE]
 
 #def pipeq():            return re.compile(r"\|=")
@@ -47,7 +49,7 @@ def pipeq():            return "|="
 
 def arr():              return arrow
 def ident():            return symbol, -1, (dot, symbol)
-def assign():           return pipeq, ident
+def assign():           return pipeq, [ident, tupe]
 def place():            return [assign, ident, tupe]
 
 #def expression():       return [(place, -1, (arr, place)),
