@@ -1,0 +1,25 @@
+module math {       /* ::::  */
+def apply (func f, var x) {       /* :::: ./temp/tmpfile-pass-2.ally:2 */ 
+f > ap;      /* :::: ./temp/tmpfile-pass-2.ally:3 */
+x > ap;      /* :::: ./temp/tmpfile-pass-2.ally:3 */
+ap > return;      /* :::: ./temp/tmpfile-pass-2.ally:5 */
+}
+def fact (var n, func f) {       /* :::: ./temp/tmpfile-pass-2.ally:8 */ 
+var tmp = 1;      /* :::: ./temp/tmpfile-pass-2.ally:9 */
+min1 > n;      /* :::: ./temp/tmpfile-pass-2.ally:10 */
+n > min1;      /* :::: ./temp/tmpfile-pass-2.ally:11 */
+n > mul;      /* :::: ./temp/tmpfile-pass-2.ally:12 */
+mul > tmp;      /* :::: ./temp/tmpfile-pass-2.ally:13 */
+tmp > mul;      /* :::: ./temp/tmpfile-pass-2.ally:14 */
+tmp > dup;      /* :::: ./temp/tmpfile-pass-2.ally:15 */
+dup > return;      /* :::: ./temp/tmpfile-pass-2.ally:16 */
+n > gt1;      /* :::: ./temp/tmpfile-pass-2.ally:18 */
+gt1 +> min1;      /* :::: ./temp/tmpfile-pass-2.ally:20 */
+gt1 -> dup;      /* :::: ./temp/tmpfile-pass-2.ally:22 */
+}
+def main () {       /* :::: ./temp/tmpfile-pass-2.ally:25 */ 
+var msg = "asdf";      /* :::: ./temp/tmpfile-pass-2.ally:26 */
+msg > sys.out;      /* :::: ./temp/tmpfile-pass-2.ally:27 */
+}
+
+}

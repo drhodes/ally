@@ -5,6 +5,7 @@ import sys
 
 from pass1 import (
     Node,
+    ident,
     parameterlist,
     function,
     TFI,
@@ -17,6 +18,8 @@ from pass1 import (
     FWD,
     BAK,
     SPACE,
+    literal,
+    dot,
     )
 
 def maketree(pt):
@@ -59,18 +62,6 @@ class rawstring(Node):
     def show(self):
         return self.args[0][0]
         
-class literal(Node):
-    def __init__(self, *args):
-        Node.__init__(self, args)
-    def show(self):
-        val = self.args[0]
-        '''
-        if "." in val:
-            return "float (%s)" % val
-        else:
-            return "int (%s)" % val
-            '''
-        return val
 
 class symbol(Node):
     def __init__(self, *args):
@@ -83,10 +74,6 @@ class typedec(Node):
         Node.__init__(self, args)
     def show(self):
         return self.args[0]
-
-class dot(Node):
-    def __init__(self, *args):
-        Node.__init__(self, args)
 
 class pipeq(Node):
     def __init__(self, *args):
@@ -104,12 +91,6 @@ class arr(Node):
     def show(self):        
         return str(self.args[0][0].show())
 
-class ident(Node):
-    def __init__(self, *args):
-        Node.__init__(self, args)
-    def show(self):
-        return self.args[0][0].show()
-        
 class assign(Node):
     def __init__(self, *args):
         Node.__init__(self, args)

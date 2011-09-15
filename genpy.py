@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 import parser
 from parser import result
+from utility import *
 import sys
 
 from pass1 import (
@@ -8,8 +9,18 @@ from pass1 import (
     parameterlist,
     function,
     literal,
-    dot,
     ident,
+    dot,
+    TFI,
+    IFT,
+    IFF,
+    FFI,
+    DUB,
+    LS,
+    RS,
+    FWD,
+    BAK,
+    SPACE,
     )
 
 def maketree(pt):
@@ -51,69 +62,18 @@ class rawstring(Node):
         Node.__init__(self, args)
     def show(self):
         return self.args[0][0]
-    '''
-class literal(Node):
-    def __init__(self, *args):
-        Node.__init__(self, args)
-    def show(self):
-        return self.args[0]
-        '''
+
 class symbol(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        return self.args[0]
+        return self.args[0] 
         
 class typedec(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
         return self.args[0]
-'''
-class dot(Node):
-    def __init__(self, *args):
-        Node.__init__(self, args)
-'''
-class TFI(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<+" )
-
-class IFT(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="+>" )
-
-class IFF(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="->" )
-
-class FFI(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<-" )
-
-class DUB(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<>" )    
-
-class LS(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<<" )
-
-class RS(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr=">>" )
-
-class FWD(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args,arrstr= ">" )
-
-class BAK(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args,arrstr= "<" )
-
-
-class SPACE(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<" )
 
 class pipeq(Node):
     def __init__(self, *args):
@@ -159,70 +119,84 @@ class expression(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
 
-    def decompose_arrow(self, a, b, c):        
-        stmts = []
+    def glue(self, a, b, c):
+        return "    __gm__.add_arrow('%s', '%s', '%s', '%s')" % (a, b, c, self.line)    
 
-        def knit(fst, arrstr, snd):
-            return "%s %s %s; %s\n" % (fst.show(), arrstr, snd.show(), snd.line_comment())
-        
-        # split arrows and flip them, to reduce work in the next pass.
-        if b.show() == "<>":
-            stmts.append( knit(a, ">", c) )
-            stmts.append( knit(c, ">", a) )
-        elif b.show() == "<<":
-            stmts.append( knit(c, ">>", a))
-        elif b.show() == "<+":
-            stmts.append( knit(c, "+>", a))
-        elif b.show() == "<-":
-            stmts.append( knit(c, "->", a))
-        elif b.show() == "<":
-            stmts.append( knit(c, ">", a))                      
-        else:                
-            stmts.append( knit(a, b.show(), c))
+    def distribute_both(self, a, b, c):        
+        stmts = []
+        a_vals = a.args[0][0].args[0]
+        for aval in a_vals:
+            stmts.extend(self.distribute_right(aval, b, c))
         return stmts
 
+    def distribute_left(self, a, b, c):
+        "(a, b) > c; ==> a>c; a>c;"
+        a_vals = a.args[0][0].args[0]
+        a_strs = [x.show() for x in a_vals]
+        b_str = b.show()
+        c_str = c.show()
+        stmts = []
+        for s in a_strs:
+            stmts.append(self.glue(s, b_str, c_str))
+        return stmts
+
+    def distribute_right(self, a, b, c):
+        "a > (b, c); ==> a>b; a>c;"
+        a_str = a.show()
+        b_str = b.show()
+        c_vals = c.args[0][0].args[0]
+        c_strs = [x.show() for x in c_vals]
+        stmts = []
+        for s in c_strs:
+            stmts.append(self.glue(a_str, b_str, s))
+        return stmts
+
+    def distribute_tupe(self, a, b, c):
+        if ( a.args[0][0].cls_name() == "tupe" and
+             c.args[0][0].cls_name() == "tupe" ):
+            return self.distribute_both(a, b, c)
+
+        if ( a.args[0][0].cls_name() == "tupe" ):
+            return self.distribute_left(a, b, c)
+
+        if ( c.args[0][0].cls_name() == "tupe" ):
+            return self.distribute_right(a, b, c)
+        
+        raise ValueError("Shouldn't be here")
+
     def show1(self, items):
-        return items[0].show() + "; %s" % items[0].line_comment()
+        return "" # "    " + items[0].show() + ";"
 
     def show(self):     
-        showlist = []              
-        items = list(self.args[0])
-        if len(items) == 1:
-            return self.show1(items)
-
-        accum = []        
-        while 1:
-            if len(items) == 0:
-                break
-
-            if len(items) == 3:
-                accum.append(items)
-                break
-            accum.append(items[:3])            
-            items = items[2:]                
-        
+        if len(self.args[0]) == 1:
+            return self.show1(self.args[0]) 
+        a,b,c = self.args[0]
         stmts = []
 
-        for a,b,c in accum:
-            for stmt in self.decompose_arrow(a, b, c):                
-                stmts.append(stmt)
-        return ''.join(stmts)
+        if ( a.args[0][0].cls_name() == "tupe" or
+             c.args[0][0].cls_name() == "tupe" ):
+            stmts.extend(self.distribute_tupe(a, b, c))
+        else:
+            stmts.append(self.glue(a.show(),
+                                   b.show(),
+                                   c.show()))        
+        return "\n".join(stmts)
 
 class declaration(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        temp = "%s %s = %s;" + self.line_comment()
+        temp = "    __gm__.add_declaration('%s', '%s', %s, '%s')"
         typedec = self.args[0][0].show()
         lhs = self.args[0][1].show()
         rhs = self.args[0][2].show()
-        return temp % (typedec, lhs, rhs)            
+        return temp % (typedec, lhs, rhs, self.line)            
 
 class statement(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
     def show(self):
-        return self.args[0][0].show() 
+        return self.args[0][0].show()
 
 class block(Node):
     def __init__(self, *args):
@@ -239,18 +213,36 @@ class tupe(Node):
     def show(self):
         temp = "(%s)" % ', '.join([x.show() for x in self.args[0]])
         return temp
-        
-'''
+
+#------------------------------------------------------------------
+class parameterlist(Node):
+    def __init__(self, *args):
+        Node.__init__(self, args)
+    def show(self):        
+        pairs = pairify(self.args[0])
+        items = []
+        for a, b in pairs:
+            items.append("    __gm__.add_param('%s', '%s', '%s')" % (a.show(), 
+                                                                     b.show(),
+                                                                     self.line))
+        result = "%s" % "\n".join(items)
+        return result
+
+#------------------------------------------------------------------
 class function(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
-    def show(self):
-        temp = "def %s %s {\n%s\n}"
+    def show(self, mod_name):
+        temp = "\ndef %s ():\n"
+        temp += "    " + "__gm__ = GraphMachine()\n%s\n%s"
+        temp += "\n    " + "return __gm__.run()"
         name = self.args[0][0]
         params = self.args[0][1]
-        block = self.args[0][2]
-        return temp % (name.show(), params.show(), block.show())
-'''
+        block = self.args[0][2]        
+        return temp % (name.show(), 
+                       params.show(),                        
+                       block.show())
+
 # ------------------------------------------------------------------        
 class mod(Node):
     def __init__(self, *args):
@@ -258,16 +250,13 @@ class mod(Node):
 
     def show(self, quiet=False):
         name = self.args[0][0]
-        output = ""
-        output += ("module %s {\n" % name.show())
-        for item in self.args[0][1:]:
-            if quiet:
-                item.show()
-            else:
-                output += (item.show()+"\n")
-        output += "\n}\n"
-        return output
+        output = "from runtime import *\n\n"
 
+        for item in self.args[0][1:]:
+            if item.cls_name() == "function":
+                output += (item.show(name)+"\n")
+        output += "if __name__ == '__main__': main()"
+        return output
 
 def tbl(n):
     d = {
@@ -306,6 +295,6 @@ def tbl(n):
 tree = result[0]
 
 t = maketree(tree)
-filename = "./temp/tmpfile-pass-2.ally"
+filename = "./temp/tmpgen.py"
 tmpfile = open(filename, 'w')
 tmpfile.write(t.show())

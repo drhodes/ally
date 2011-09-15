@@ -13,4 +13,9 @@ module math {
                    |-> dup
                    ;
     }
+
+    def main () {
+        var msg = "asdf";
+        sys.out < msg;
+    }
 }

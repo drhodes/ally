@@ -129,6 +129,7 @@ class typedec(Node):
 class dot(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
+    def show(self): return "."
 
 class TFI(Pipe):
     def __init__(self, *args):
@@ -233,8 +234,9 @@ class arr(Node):
 class ident(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
-    def show(self):
-        return self.args[0][0].show()
+    def show(self):        
+        temp = ''.join(x.show() for x in self.args[0])
+        return temp
         
 class assign(Node):
     def __init__(self, *args):
