@@ -1,25 +1,23 @@
 module list {
-	def apply(f, val) {
+	def apply(func f, var val) {
 		val > f > return;
 	}	
-
-
 	
-	def square1(x) {
+	def square1(var x) {
 		(x, x) > mul > return;		
 	}
 	
-	def square2(x) {
+	def square2(var x) {
 		return < mul < (x, x);
 	}
 
-	def square3(x) {
+	def square3(var x) {
 		|= mul
 		|< (x, x)
 		|> return;
 	}
 
-	def square4(x) {
+	def square4(var x) {
 		return < |= mul
 		         |< x
 		         |< x;

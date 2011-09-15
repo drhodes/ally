@@ -1,26 +1,57 @@
-module math {
-def apply (func f, var x) {       /* :::: ./temp/tmpfile-pass-1.ally:2 */ 
-(f, x) > ap;       /* :::: ./temp/tmpfile-pass-1.ally:3 */
+module galore {
+def func1 (var x) {       /* :::: ./temp/tmpfile-pass-1.ally:2 */ 
+x > a;       /* :::: ./temp/tmpfile-pass-1.ally:3 */
 
-ap > return;       /* :::: ./temp/tmpfile-pass-1.ally:4 */
+x > c;       /* :::: ./temp/tmpfile-pass-1.ally:4 */
+c > c1;       /* :::: ./temp/tmpfile-pass-1.ally:4 */
+c1 > c2;       /* :::: ./temp/tmpfile-pass-1.ally:4 */
+c2 > c1;       /* :::: ./temp/tmpfile-pass-1.ally:4 */
+c2 >> c3;       /* :::: ./temp/tmpfile-pass-1.ally:4 */
+
+x >> d;       /* :::: ./temp/tmpfile-pass-1.ally:5 */
+d1 >> d;       /* :::: ./temp/tmpfile-pass-1.ally:5 */
+
+g +> x;       /* :::: ./temp/tmpfile-pass-1.ally:6 */
+g1 +> g;       /* :::: ./temp/tmpfile-pass-1.ally:6 */
+
+x +> h;       /* :::: ./temp/tmpfile-pass-1.ally:7 */
+h +> (h1, h2);       /* :::: ./temp/tmpfile-pass-1.ally:7 */
+
+x -> (i3, i2, i2);       /* :::: ./temp/tmpfile-pass-1.ally:8 */
+(i3, i2, i2) -> i3;       /* :::: ./temp/tmpfile-pass-1.ally:8 */
+i3 > y1;       /* :::: ./temp/tmpfile-pass-1.ally:8 */
+
+j -> y1;       /* :::: ./temp/tmpfile-pass-1.ally:9 */
+j1 -> j;       /* :::: ./temp/tmpfile-pass-1.ally:9 */
+
+y1 > k;       /* :::: ./temp/tmpfile-pass-1.ally:10 */
+k > y1;       /* :::: ./temp/tmpfile-pass-1.ally:10 */
+k > k1;       /* :::: ./temp/tmpfile-pass-1.ally:10 */
+k1 > k;       /* :::: ./temp/tmpfile-pass-1.ally:10 */
+k2 > k1;       /* :::: ./temp/tmpfile-pass-1.ally:10 */
+k3 > k2;       /* :::: ./temp/tmpfile-pass-1.ally:10 */
+
+m >> y1;       /* :::: ./temp/tmpfile-pass-1.ally:11 */
+m >> m1;       /* :::: ./temp/tmpfile-pass-1.ally:11 */
+m2 > m1;       /* :::: ./temp/tmpfile-pass-1.ally:11 */
+m3 > m2;       /* :::: ./temp/tmpfile-pass-1.ally:11 */
+m4 > m3;       /* :::: ./temp/tmpfile-pass-1.ally:11 */
+m5 > m4;       /* :::: ./temp/tmpfile-pass-1.ally:11 */
+
+y1 >> n;       /* :::: ./temp/tmpfile-pass-1.ally:12 */
+n1 >> n;       /* :::: ./temp/tmpfile-pass-1.ally:12 */
+
+y1 > o;       /* :::: ./temp/tmpfile-pass-1.ally:13 */
+o > o1;       /* :::: ./temp/tmpfile-pass-1.ally:13 */
+
+f > y1;       /* :::: ./temp/tmpfile-pass-1.ally:14 */
+f1 > f;       /* :::: ./temp/tmpfile-pass-1.ally:14 */
+y > f1;       /* :::: ./temp/tmpfile-pass-1.ally:14 */
+z > y;       /* :::: ./temp/tmpfile-pass-1.ally:14 */
 
 }
-def fact (var n, func f) {       /* :::: ./temp/tmpfile-pass-1.ally:6 */ 
-var tmp = 1;      /* :::: ./temp/tmpfile-pass-1.ally:7 */
-min1 > n;       /* :::: ./temp/tmpfile-pass-1.ally:8 */
-n > min1;       /* :::: ./temp/tmpfile-pass-1.ally:8 */
-n > mul;       /* :::: ./temp/tmpfile-pass-1.ally:8 */
-mul > tmp;       /* :::: ./temp/tmpfile-pass-1.ally:8 */
-tmp > mul;       /* :::: ./temp/tmpfile-pass-1.ally:8 */
-tmp > dup;       /* :::: ./temp/tmpfile-pass-1.ally:8 */
-dup > return;       /* :::: ./temp/tmpfile-pass-1.ally:8 */
-
-n > gt1;       /* :::: ./temp/tmpfile-pass-1.ally:9 */
-
-gt1 +> min1;       /* :::: ./temp/tmpfile-pass-1.ally:10 */
-
-gt1 -> dup;       /* :::: ./temp/tmpfile-pass-1.ally:11 */
-
+def what () {       /* :::: ./temp/tmpfile-pass-1.ally:16 */ 
+a;       /* :::: ./temp/tmpfile-pass-1.ally:17 */
 }
 
 }

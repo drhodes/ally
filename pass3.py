@@ -80,48 +80,7 @@ class typedec(Node):
 class dot(Node):
     def __init__(self, *args):
         Node.__init__(self, args)
-'''
-class TFI(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<+" )
 
-class IFT(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="+>" )
-
-class IFF(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="->" )
-
-class FFI(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<-" )
-
-class DUB(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<>" )    
-
-class LS(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<<" )
-
-class RS(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr=">>" )
-
-class FWD(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args,arrstr= ">" )
-
-class BAK(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args,arrstr= "<" )
-
-
-class SPACE(Pipe):
-    def __init__(self, *args):
-        Pipe.__init__(self, args, arrstr="<" )
-'''
 class pipeq(Node):
     def __init__(self, *args):
         Node.__init__(self, args)

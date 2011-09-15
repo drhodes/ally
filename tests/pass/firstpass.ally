@@ -1,6 +1,6 @@
 module simple {
     "this module does x"
-    def max (x, y) {
+    def max (var x, var y) {
         var tmp__id__1__ = x;
         var tmp__id__2__ = i;
         a < tmp__id__1__ ;

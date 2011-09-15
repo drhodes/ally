@@ -14,7 +14,8 @@ def comment():          return [re.compile(r"//.*"), re.compile("/\*.*?\*/", re.
 def module():           return re.compile(r"module")
 def rawstring():        return [re.compile(r"\".*?\"")]
 def literal():          return re.compile(r'\d*\.\d*|\d+|".*?"')
-def symbol():           return re.compile(r"\w+")
+#def symbol():           return re.compile(r"\w+")
+def symbol():           return re.compile(r"[A-z]+[A-z|0-9|_]*")
 def typedec():          return re.compile(r"var|func|pred|ctrl")
 def dot():              return re.compile(r"\.")
 
@@ -51,7 +52,7 @@ def ident():            return symbol, -1, (dot, symbol)
 def assign():           return pipeq, [ident, tupe]
 def place():            return [assign, ident, tupe]
 def expression():       return place, -1, (arr, place)
-def declaration():      return typedec, symbol, "=", ident
+def declaration():      return typedec, symbol, "=", [ident, literal]
 def statement():        return [declaration, expression, comment, rawstring], -2, ";"
 def block():            return "{", -1, [rawstring, statement], "}"
 def tupe():             return "(", 0, ([literal, ident], -1, (",", [literal, ident])), ")"

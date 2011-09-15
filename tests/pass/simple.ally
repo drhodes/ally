@@ -1,13 +1,12 @@
 module simple {
     "this module does x"    
-    def max(x, y) {        
+    def max (var x, var y) {        
         a |= x
           |< c
           |-> d
           |+> e f g > h > |= i
                           |< j
-                          ;
-        
+                          ;        
     }        
 }
 
