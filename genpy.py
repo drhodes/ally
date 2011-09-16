@@ -292,9 +292,9 @@ def tbl(n):
         }
     return d[n]
 
-tree = result[0]
-
-t = maketree(tree)
-filename = "./temp/tmpgen.py"
-tmpfile = open(filename, 'w')
-tmpfile.write(t.show())
+if __name__ == "__main__":
+    tree = result[0]
+    t = maketree(tree)
+    filename = "./temp/tmpgen.py"
+    tmpfile = open(filename, 'w')
+    tmpfile.write(t.show())

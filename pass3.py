@@ -270,9 +270,10 @@ def tbl(n):
         }
     return d[n]
 
-tree = result[0]
-
-t = maketree(tree)
-filename = "./temp/tmpfile-pass-3.ally"
-tmpfile = open(filename, 'w')
-tmpfile.write(t.show())
+if __name__ == "__main__":    
+    tree = result[0]
+    t = maketree(tree)
+    filename = "./temp/tmpfile-pass-3.ally"
+    tmpfile = open(filename, 'w')
+    tmpfile.write(t.show())
+    tmpfile.close()

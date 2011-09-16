@@ -1,10 +1,11 @@
 module math {
+    /*
     def apply (func f, var x) {
         |= ap (f, x)
         |> return;
     }
 
-    def fact (var n, func f) {
+    def fact ( var n, func f) {
         var tmp = 1;
         
         min1 <> |= n > mul <> tmp > dup > return
@@ -13,9 +14,9 @@ module math {
                    |-> dup
                    ;
     }
-
-    def main () {
+    */    
+    def main (var x, var x) {
         var msg = "asdf";
-        sys.out < msg;
+        out < msg;
     }
 }

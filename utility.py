@@ -9,6 +9,26 @@ def pairify(lst):
 
     return [(lst[0], lst[1])] + pairify(lst[2:])
 
+
+def lookupErr(line):
+    line3 = int(line.split("tmpfile-pass-3.ally:")[-1]) - 1
+    val3 = open("./temp/tmpfile-pass-3.ally").readlines()[line3]
+
+    line2 = int(val3.split("tmpfile-pass-2.ally:")[-1]) - 1        
+    val2 = open("./temp/tmpfile-pass-2.ally").readlines()[line2]
+
+    line1 = int(val2.split("tmpfile-pass-1.ally:")[-1]) - 1        
+    val1 = open("./temp/tmpfile-pass-1.ally").readlines()[line1]
+                
+    userfilename = val1.split(":")[-2]
+    userlinenum = int(val1.split(":")[-1]) -1        
+    userfile = open(userfilename.strip(), 'r').readlines()
+    userline = userfile[userlinenum]
+
+    return (userfilename, userline, str(userlinenum))
+
+
+
 if __name__ == "__main__":
     print pairify([1, 2,3,4]) == [(1,2),(3,4)] 
     

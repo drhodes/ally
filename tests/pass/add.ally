@@ -1,7 +1,8 @@
 // This is nonsense, but the comment is good.
 
 module main {
-	def zip(var a, var b) {
-		// take two lists		
+	def main(var a, var b) {
+        var c = 2;
+        return add (a, b);
 	}
 }

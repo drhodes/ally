@@ -64,8 +64,8 @@ class Node(object):
         print msg        
         raise ValueError("ally: Error @ %s" % self.line)
 
-    def line_comment(self):
-        return "      /* :::: %s */" % self.line
+    def line_comment(self):        
+        return "      // :::: %s" % self.line
 
 class Pipe(Node):
     def __init__(self, *args, **kwargs):
@@ -445,8 +445,9 @@ def tbl(n):
     return d[n]
 
 
-t = maketree(tree)
-filename = "./temp/tmpfile-pass-1.ally"
-tmpfile = open(filename, 'w')
-tmpfile.write(t.show())
-tmpfile.close()
+if __name__ == "__main__":    
+    t = maketree(tree)
+    filename = "./temp/tmpfile-pass-1.ally"
+    tmpfile = open(filename, 'w')
+    tmpfile.write(t.show())
+    tmpfile.close()
