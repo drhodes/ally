@@ -4,19 +4,12 @@ module math {
         |= ap (f, x)
         |> return;
     }
-
-    def fact ( var n, func f) {
+    */
+    def main (var n) {
         var tmp = 1;
         
-        min1 <> |= n > mul <> tmp > dup > return
-                |> |= gt1
-                   |+> min1
-                   |-> dup
-                   ;
-    }
-    */    
-    def main (var x, var x) {
-        var msg = "asdf";
-        out < msg;
-    }
+        |= n > mul <> tmp > id > return
+        |<> min1 <+ gt1 -> id
+        |> gt1;
+    }    
 }

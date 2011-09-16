@@ -46,6 +46,16 @@ class Arrow(object):
         self.tgt = tgt
         self.line = line
 
+    def kind(self):
+        if artype == ">":
+            return "apply"
+        if artype == ">>":
+            return "compose"
+        if artype == "+>":
+            return "condition-true"
+        if artype == "->":
+            return "confition-false"
+
     def targets_return(self):
         return self.tgt == "return"
         
@@ -84,8 +94,7 @@ class GraphMachine(object):
         self.params[name] = param
 
     def add_arrow(self, src, artype, tgt, line):
-        arr = Arrow(src, artype, tgt, line)
-        
+        arr = Arrow(src, artype, tgt, line)        
         self.places[src] = Place(src, line)
         self.places[tgt] = Place(tgt, line)
         self.arrows.append(arr)
@@ -114,8 +123,11 @@ class GraphMachine(object):
         self.places["return"].kind = "val"
 
         for arr in self.arrows:
-            if arr.targets_return():               
+            if arr.targets_return():                               
                 self.places[arr.src].kind = "func"
+
+            # if arrow target is place 
+
             
         for arr in self.arrows:
             if self.places[arr.tgt].check_sane():
