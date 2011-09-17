@@ -5,10 +5,18 @@ module math {
         |> return;
     }
     */
+    def add0(var a) {
+        var b = 1;
+        return add (a, b);
+    }
+    
+    def foo(var a, var b){
+        return < add (a, b);
+    }
     def main (var n) {
         var tmp = 1;
         
-        |= n > mul <> tmp > id > return
+        |= n > mul <> tmp > id >> add0 > return
         |<> min1 <+ gt1 -> id
         |> gt1;
     }    

@@ -234,14 +234,16 @@ class function(Node):
         Node.__init__(self, args)
     def show(self, mod_name):
         temp = "\ndef %s ():\n"
-        temp += "    " + "__gm__ = GraphMachine()\n%s\n%s"
+        temp += "    " + "__gm__ = GraphMachine('%s', '%s')\n%s\n%s"
         temp += "\n    " + "return __gm__.run()"
         name = self.args[0][0]
         params = self.args[0][1]
         block = self.args[0][2]        
-        return temp % (name.show(), 
-                       params.show(),                        
-                       block.show())
+        return temp % ( name.show(),
+                        name.show(), 
+                        self.line_comment(),
+                        params.show(),                        
+                        block.show())
 
 # ------------------------------------------------------------------        
 class mod(Node):
@@ -250,12 +252,21 @@ class mod(Node):
 
     def show(self, quiet=False):
         name = self.args[0][0]
-        output = "from runtime import *\n\n"
+        output = "from runtime import *\n"
+        output += "from ally_module import *\n\n"
 
         for item in self.args[0][1:]:
             if item.cls_name() == "function":
                 output += (item.show(name)+"\n")
-        output += "if __name__ == '__main__': main()"
+        output += "if __name__ == '__main__':\n"
+        output += "    am = AllyModule('%s')\n"  % (name.show())
+
+        for item in self.args[0][1:]:            
+            if item.cls_name() == "function":
+                output += "    am.add_trans(%s, '%s')\n" % ( item.args[0][0].show(), 
+                                                             item.line_comment().strip() )
+        output += "    am.register_transitions()\n"
+        output += "    am.run_main()\n"
         return output
 
 def tbl(n):

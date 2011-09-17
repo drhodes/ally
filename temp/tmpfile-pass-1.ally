@@ -1,0 +1,16 @@
+module math {
+def add0 (var a) {       // :::: ./tests/pass/fact.ally:8 
+var b = 1;      // :::: ./tests/pass/fact.ally:9
+return < add < (a, b);      // :::: ./tests/pass/fact.ally:10
+}
+def foo (var a, var b) {       // :::: ./tests/pass/fact.ally:13 
+return < add < (a, b);      // :::: ./tests/pass/fact.ally:14
+}
+def main (var n) {       // :::: ./tests/pass/fact.ally:16 
+var tmp = 1;      // :::: ./tests/pass/fact.ally:17
+n > mul <> tmp > id >> add0 > return ;       // :::: ./tests/pass/fact.ally:20
+ n <> min1 <+ gt1 -> id ;       // :::: ./tests/pass/fact.ally:21
+ n > gt1;      // :::: ./tests/pass/fact.ally:19
+}
+
+}

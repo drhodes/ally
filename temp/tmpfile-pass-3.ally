@@ -1,0 +1,28 @@
+module math {       // :::: 
+def add0 (var a) {       // :::: ./temp/tmpfile-pass-2.ally:2 
+var b = 1;      // :::: ./temp/tmpfile-pass-2.ally:3
+add > return;      // :::: ./temp/tmpfile-pass-2.ally:4
+a > add;      // :::: ./temp/tmpfile-pass-2.ally:5
+b > add;      // :::: ./temp/tmpfile-pass-2.ally:5
+}
+def foo (var a, var b) {       // :::: ./temp/tmpfile-pass-2.ally:8 
+add > return;      // :::: ./temp/tmpfile-pass-2.ally:9
+a > add;      // :::: ./temp/tmpfile-pass-2.ally:10
+b > add;      // :::: ./temp/tmpfile-pass-2.ally:10
+}
+def main (var n) {       // :::: ./temp/tmpfile-pass-2.ally:13 
+var tmp = 1;      // :::: ./temp/tmpfile-pass-2.ally:14
+n > mul;      // :::: ./temp/tmpfile-pass-2.ally:15
+mul > tmp;      // :::: ./temp/tmpfile-pass-2.ally:16
+tmp > mul;      // :::: ./temp/tmpfile-pass-2.ally:17
+tmp > id;      // :::: ./temp/tmpfile-pass-2.ally:18
+id >> add0;      // :::: ./temp/tmpfile-pass-2.ally:19
+add0 > return;      // :::: ./temp/tmpfile-pass-2.ally:20
+n > min1;      // :::: ./temp/tmpfile-pass-2.ally:22
+min1 > n;      // :::: ./temp/tmpfile-pass-2.ally:23
+gt1 +> min1;      // :::: ./temp/tmpfile-pass-2.ally:24
+gt1 -> id;      // :::: ./temp/tmpfile-pass-2.ally:25
+n > gt1;      // :::: ./temp/tmpfile-pass-2.ally:27
+}
+
+}

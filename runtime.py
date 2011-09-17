@@ -2,7 +2,7 @@
 # >> compose
 # +> if_true
 # -> if_false
-from utility import lookupErr
+from utility import lookupErr, error, has_function
 
 def add(a, b): return a + b
 
@@ -19,6 +19,12 @@ class Value(object):
         self.val = val
 
 
+class Cond(object):
+    def __init__(self, name, line):
+        self.name = name
+        self.line = line
+        self.content = None
+
 class Place(object):
     def __init__(self, name, line):
         self.name = name
@@ -30,7 +36,10 @@ class Place(object):
     def __repr__(self):
         return "(%s)" % self.name
 
-    def check_sane(self):
+    def is_empty(self):
+        return self.content == None
+
+    def is_typed(self):
         return self.kind != None
 
     def is_function(self):
@@ -47,115 +56,87 @@ class Arrow(object):
         self.line = line
 
     def kind(self):
-        if artype == ">":
-            return "apply"
-        if artype == ">>":
-            return "compose"
-        if artype == "+>":
-            return "condition-true"
-        if artype == "->":
-            return "confition-false"
+        return self.artype
 
     def targets_return(self):
         return self.tgt == "return"
         
     def __repr__(self):
         return "[Arrow: %s %s %s]" % (self.src, self.artype, self.tgt)
+
                  
 class GraphMachine(object):
-    def __init__(self):        
-        self.params = {}        
+    def __init__(self, name, line):        
+        self.name = name
+        self.line = line
         self.arrows = []
-        self.funcs = {}
-        self.vars = {}
+        self.trans = {}
         self.places = {}
-
-    def targets_return(self):
-        for a in self.arrows:
-            if a.targets_return():
-                return a
-        self.error("functions must return!")
-        return None
-            
-    def error(self, msg, line):
-        fn, ln, num = lookupErr( line)        
-        tmp = "\n\n%s\n\nfile:    %s\nline:    %s\n\nline number:    %s"
-        raise SyntaxError(tmp % ( msg.strip(),
-                                  fn.strip(),
-                                  ln.strip(),
-                                  num.strip()))
 
     def add_param(self, typedec, name, line):
         param = Parameter(typedec, name, line)
-        msg = "Parameter name: `%s`, is trying to shadow:"
-        if name in self.params:
-            other = self.params[name]         
-            self.error(msg % name, line)
-        self.params[name] = param
+        msg = "Parameter name: `%s`, is already defined."
+
+        if name in self.places:
+            error(msg % name, line)
+            
+        self.places[name] = Place(name, line)
+        self.places[name].kind = typedec
 
     def add_arrow(self, src, artype, tgt, line):
         arr = Arrow(src, artype, tgt, line)        
-        self.places[src] = Place(src, line)
-        self.places[tgt] = Place(tgt, line)
         self.arrows.append(arr)
 
     def add_declaration(self, typedec, name, val, line):
-        if name in self.params:            
-            self.error("Declaration is trying to shadow a parameter", line)
         if name in self.places:
-            self.error("Declaration is trying to shadow a previous declaration", line)
-        plc = Place(name, line)
+            error("Declaration `%s` is already defined.", line)
 
+        plc = Place(name, line)
         plc.content = val
         plc.kind = typedec
-        self.places[name] = plc
+        self.places[name] = plc        
 
-    def add_compose(self, src, tgt):
-        pass
+    def check_has_return(self):
+        for a in self.arrows:            
+            if a.tgt == "return":
+                return True
+        error("Function: `%s`, has no return" % self.name, self.line)
 
-    def add_cond_true(self, src, tgt):
-        pass
+    def name_exists(self, name):
+        if ( has_function(prelude, name) or
+             name in self.places ):                    
+            return True
+        error("Name: `%s`, not found", name)
+        
+    def check_iff(self, arr):
+        print arr
 
-    def add_cond_false(self, src, tgt):
-        pass
+    def check_ift(self, arr):
+        print arr
 
-    def typify(self):
-        self.places["return"].kind = "val"
+    def check_apply(self, arr):
+        print arr
+        
+    def check_compose(self, arr):
+        print arr
 
-        for arr in self.arrows:
-            if arr.targets_return():                               
-                self.places[arr.src].kind = "func"
+    def check_arrows(self):        
+        for arr in self.arrows:            
+            if arr.artype == "+>":
+                self.check_ift(arr)
+            if arr.artype == "->":
+                self.check_iff(arr)
+            if arr.artype == ">>":
+                self.check_compose(arr)
+            if arr.artype == ">":
+                self.check_apply(arr)
 
-            # if arrow target is place 
 
-            
-        for arr in self.arrows:
-            if self.places[arr.tgt].check_sane():
-                if self.places[arr.src].check_sane():
-                    continue
-                else:
-                    if self.places[arr.tgt].is_function():
-                        self.places[arr.src].kind = "val" # this needs to change
-                    else:
-                        self.places[arr.src].kind = "func" # use polymorphism here.
-
-        for p in self.places.values():
-            if not p.check_sane():
-                self.typify()
-            
-        for p in self.places.values():
-            print p, p.kind
-
+                       
     def run(self):
-        self.typify()
+        self.check_has_return()        
+        self.check_arrows()
         print "Running!"
-
-
-
-
-
-
-
 
 
 

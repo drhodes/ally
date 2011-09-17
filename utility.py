@@ -28,6 +28,18 @@ def lookupErr(line):
     return (userfilename, userline, str(userlinenum))
 
 
+def error(msg, line):
+    fn, ln, num = lookupErr( line)        
+    tmp = "\n\n%s\n\nfile:    %s\nline:    %s\n\nline number:    %s"
+    raise SyntaxError(tmp % ( msg.strip(),
+                              fn.strip(),
+                              ln.strip(),
+                              num.strip()))
+
+def has_function(mod, s):
+    return s in mod.__dict__
+    
+
 
 if __name__ == "__main__":
     print pairify([1, 2,3,4]) == [(1,2),(3,4)] 
